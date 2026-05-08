@@ -6,10 +6,12 @@ import CustomLegend from './CustomLegend';
 
 const CustomPieChart = ({data, colors, label, totalAmount, showTextAnchor}) => {
   return (
-    <div className='card'>
-        <div className='flex items-center justify-between mb-5'>
-            <h5 className='text-lg'>{label}</h5>
-            <span className='text-sm text-gray-500'>Total: {totalAmount}</span>
+    <div className='w-full'>
+        <div className='flex items-center justify-between mb-6'>
+            <h5 className='text-xl font-bold text-gray-800'>{label}</h5>
+            <span className='px-3 py-1 bg-gray-100 text-gray-600 rounded-lg text-xs font-bold uppercase tracking-wider'>
+              Total: ${totalAmount}
+            </span>
         </div>
 
         <ResponsiveContainer width="100%" height={300}>

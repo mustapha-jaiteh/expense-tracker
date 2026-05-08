@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Input from "../inputs/Input.jsx"
 import EmojiPickerPopup from '../EmojiPickerPopup.jsx'
+import { LuPlus, LuSave } from 'react-icons/lu'
 
 
 const AddIncomeForm = ({onAddIncome, initialData}) => {
@@ -47,13 +48,14 @@ const AddIncomeForm = ({onAddIncome, initialData}) => {
         type="date"
         />
 
-        <div className='flex justify-end mt-6'>
+        <div className='flex justify-end mt-8'>
             <button 
-            className="add-btn add-btn-fill"
+            className="btn-primary flex items-center justify-center gap-2 max-w-[200px]"
             type='button'
             onClick={() => onAddIncome(initialData ? {...income, _id: initialData._id} : income)}
             >
-             {initialData ? "Update Income" : "Add Income"}
+             {initialData ? <LuSave className='text-lg' /> : <LuPlus className='text-lg' />}
+             <span>{initialData ? "Update Income" : "Add Income"}</span>
             </button>
         </div>
     </div>

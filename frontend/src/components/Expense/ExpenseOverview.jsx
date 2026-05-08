@@ -16,16 +16,16 @@ const ExpenseOverview = ({transactions, onExpenseIncome}) => {
 
 
   return (
-    <div className='card'>
-        <div className='flex items-center justify-between'>
+    <div className='card animate-fade-in'>
+        <div className='flex flex-col md:flex-row md:items-center justify-between gap-4'>
             <div className=''>
-                <h5 className='text-lg'>Expense Overview</h5>
-                <p className='text-xs text-gray-400 mt-0.5'> track your spending trends over time and gain insights into where your money goes</p>
+                <h5 className='text-2xl font-bold text-gray-900'>Expense Overview</h5>
+                <p className='text-sm text-gray-500 mt-1'>Track your spending trends and analyze your top categories</p>
             </div>
 
-            <button className='add-btn' onClick={onExpenseIncome}>
-                <LuPlus className='text-lg' />
-                Add Expense
+            <button className='add-btn add-btn-fill group' onClick={onExpenseIncome}>
+                <LuPlus className='text-xl group-hover:rotate-90 transition-transform duration-300' />
+                <span>Add Expense</span>
             </button>
         </div>
        

@@ -6,10 +6,10 @@ const CustomLineChart = ({data}) => {
     const CustomTooltip = ({active, payload}) => {
         if(active && payload && payload.length) {
             return (
-                <div className='bg-white p-2 border border-gray-300 rounded-lg shadow-md'>
-                    <p className='text-xs font-semibold text-purple-800'>{payload[0].payload.category}</p>
-                    <p className='text-xs text-gray-600'>
-                        Amount: <span className='text-sm font-medium text-gray-900'>{payload[0].payload.amount}</span>
+                <div className='bg-white/90 backdrop-blur-md p-3 rounded-xl shadow-xl border border-gray-100'>
+                    <p className='text-xs font-bold text-gray-400 uppercase tracking-wider mb-1'>{payload[0].payload.category || 'Expense'}</p>
+                    <p className='text-lg font-bold text-primary'>
+                        ${addThousandsSeparator(payload[0].payload.amount)}
                     </p>
                 </div>
             )
@@ -17,21 +17,40 @@ const CustomLineChart = ({data}) => {
         return null
     }
   return (
-    <div className='bg-white'>
-        <ResponsiveContainer width="100%" height={300}>
+    <div className='w-full mt-6'>
+        <ResponsiveContainer width="100%" height={350}>
             <AreaChart data={data}>
             <defs>
-                <linearGradient id="incomeGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#875cf5" stopOpacity={0.4} />
+                <linearGradient id="expenseGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#875cf5" stopOpacity={0.3} />
                     <stop offset="95%" stopColor="#875cf5" stopOpacity={0} />
                 </linearGradient>
             </defs>
                
-               <CartesianGrid stroke="none" />
-               <XAxis dataKey="month" tick={{fontSize: 12, fill: "#555"}} stroke="none" />
-               <YAxis tick={{fontSize: 12, fill: "#555"}} stroke="none" />
-               <Tooltip content={<CustomTooltip />} />
-               <Area type="monotone" dataKey="amount" stroke="#875cf5" fillOpacity={1} fill="url(#incomeGradient)" strokeWidth={3} dot={{r: 3, fill: "#ab8df8"}} />
+               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+               <XAxis 
+                   dataKey="month" 
+                   tick={{fontSize: 12, fill: "#94a3b8", fontWeight: 500}} 
+                   axisLine={false}
+                   tickLine={false}
+                   dy={10}
+               />
+               <YAxis 
+                   tick={{fontSize: 12, fill: "#94a3b8", fontWeight: 500}} 
+                   axisLine={false}
+                   tickLine={false}
+               />
+               <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#875cf5', strokeWidth: 2 }} />
+               <Area 
+                   type="monotone" 
+                   dataKey="amount" 
+                   stroke="#875cf5" 
+                   fillOpacity={1} 
+                   fill="url(#expenseGradient)" 
+                   strokeWidth={4} 
+                   dot={{ r: 4, fill: "#875cf5", stroke: "#fff", strokeWidth: 2 }} 
+                   activeDot={{ r: 6, fill: "#875cf5", stroke: "#fff", strokeWidth: 2 }}
+               />
             </AreaChart>
         </ResponsiveContainer>
     </div>

@@ -22,9 +22,11 @@ const SideMenu = ({ activeMenu }) => {
     clearUser();
     navigate("/login");
  } 
-  return (
-    <div className='w-64 h-[calc(100vh-61px)] bg-white border-r border-gray-200/50 p-5 sticky  top-[61px] z-20'>
-      <div className='flex flex-col items-center justify-center gap-3 mt-3'>
+   return (
+    <div className='w-64 h-[calc(100vh-61px)] glass border-r-0 border-t-0 p-6 sticky top-[61px] z-20 rounded-none'>
+      <div className='flex flex-col items-center justify-center gap-4 mt-4'>
+       <div className='relative group'>
+        <div className='absolute -inset-1 bg-gradient-to-tr from-primary to-purple-400 rounded-full blur opacity-25 group-hover:opacity-50 transition-opacity' />
        {user?.profileImageUrl ? (
         <img 
           src={user.profileImageUrl.startsWith("http") ? user.profileImageUrl : `${BASE_URL}${user.profileImageUrl}`} 
@@ -39,21 +41,27 @@ const SideMenu = ({ activeMenu }) => {
         styte="text-xl"
         />
        )}
+       </div>
 
-       <h5 className='text-gray-950 font-medium leading-6'>
-        {user?.fullName || ""}
-       </h5>
+       <div className='text-center mb-8'>
+          <h5 className='text-gray-900 font-bold text-lg'>
+           {user?.fullName || "Welcome!"}
+          </h5>
+          <p className='text-xs text-gray-400 font-medium'>Manage your funds</p>
+       </div>
 
+       <div className='w-full space-y-2'>
        {SIDE_MENU_ITEMS.map((item, index) => (
         <button
          key={`menu_${index}`}
-         className={`w-full flex items-center gap-4 text-[15px] ${activeMenu === item.label ? "text-white bg-primary " : ""} rounded-lg px-6 py-3 mb-3 hover:bg-purple-200 `}
+         className={`${activeMenu === item.label ? "nav-item-active" : "nav-item"}`}
          onClick={() => handleClick(item.path)}
         >
             <span className='text-xl'>{item.icon}</span>
-            {item.label}
+            <span className='font-semibold'>{item.label}</span>
         </button>
        ))}
+       </div>
       </div>
     </div>
   )

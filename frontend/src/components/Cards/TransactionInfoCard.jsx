@@ -9,8 +9,8 @@ const TransactionInfoCard = ({ title, icon, amount, date, type, hideDeleteBtn, o
     }
 
     return (
-        <div className='group relative flex items-center gap-4 mt-2 p-3 rounded-lg hover:bg-gray-100/60'>
-            <div className='w-12 h-12 flex items-center justify-center text-xl text-gray-800 bg-gray-100 rounded-full'>
+        <div className='group relative flex items-center gap-4 mt-2 p-4 rounded-2xl transition-all duration-300 hover:bg-gray-50 border border-transparent hover:border-gray-100'>
+            <div className='w-12 h-12 flex items-center justify-center text-2xl bg-gray-100/80 rounded-xl group-hover:scale-110 transition-transform duration-300'>
                 {icon ? (
                     typeof icon === 'string' && (icon.startsWith('http') || icon.startsWith('data:')) ? (
                         <img src={icon} alt={title} className='w-6 h-6' />
@@ -24,8 +24,8 @@ const TransactionInfoCard = ({ title, icon, amount, date, type, hideDeleteBtn, o
 
             <div className='flex-1 flex items-center justify-between'>
                 <div className=''>
-                    <p className='text-sm text-gray-700 font-medium'>{title}</p>
-                    <span className='text-gray-400 text-xs mt-1'>{date}</span>
+                    <p className='text-[15px] text-gray-900 font-bold'>{title}</p>
+                    <span className='text-gray-400 text-xs font-medium mt-0.5 block'>{date}</span>
                 </div>
             </div>
 
@@ -45,15 +45,15 @@ const TransactionInfoCard = ({ title, icon, amount, date, type, hideDeleteBtn, o
                     </button>
                 )}
 
-                <div className={`flex items-center gap-4 px-3 py-1.5 rounded-md ${getAmountStyles()}`}>
-                    <h6 className='text-xs font-semibold'>
-                        {type === "income" ? "+" : "-"} D{addThousandsSeparator(amount)}
+                <div className={`flex items-center gap-3 px-4 py-2 rounded-xl border ${type === "income" ? "bg-emerald-50 border-emerald-100 text-emerald-600" : "bg-rose-50 border-rose-100 text-rose-600"}`}>
+                    <h6 className='text-sm font-bold'>
+                        {type === "income" ? "+" : "-"} ${addThousandsSeparator(amount)}
                     </h6>
 
                     {type === "income" ? (
-                        <LuTrendingUp className='text-green-500' />
+                        <LuTrendingUp className='text-emerald-500' />
                     ) : (
-                        <LuTrendingDown className='text-red-500' />
+                        <LuTrendingDown className='text-rose-500' />
                     )}
                 </div>
             </div>

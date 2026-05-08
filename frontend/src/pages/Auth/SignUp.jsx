@@ -9,6 +9,7 @@ import { userContext } from '../../context/userContext'
 import axiosInstance from '../../utils/axiosinstance'
 import { API_PATHS } from '../../utils/apiPaths'
 import { uploadImage } from '../../utils/uploadImage'
+import { LuUserPlus } from 'react-icons/lu'
 
 
 const SignUp = () => {
@@ -68,12 +69,13 @@ const SignUp = () => {
   }
   return (
     <Authlayout>
-      <div className='lg:w-full h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center'>
-        <h3 className='text-xl font-semibold text-black'>Create an account</h3>
-        <p className='text-xs text-slate-700 mt-[5px] mb-6'>Join us tday by signing up</p>
+      <div className='flex flex-col justify-center h-full'>
+        <div className='mb-6'>
+          <h1 className='text-3xl font-bold text-gray-900 mb-2'>Create Account</h1>
+          <p className='text-gray-500'>Join us today and start managing your finances smarter.</p>
+        </div>
 
-
-        <form onSubmit={handleSignUp}>
+        <form onSubmit={handleSignUp} className='space-y-4'>
            
            <ProfilePhotoSelector
             image={profilePic}
@@ -110,7 +112,10 @@ const SignUp = () => {
 
            {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
 
-           <button type="submit" className='btn-primary'>SIGN UP</button>
+           <button type="submit" className='btn-primary flex items-center justify-center gap-2 mt-2'>
+             <LuUserPlus className='text-lg' />
+             <span>Sign Up</span>
+           </button>
 
            <p className='text-[13px] text-slate-800 mt-3'>Already have an account? {" "}
             <Link className='font-medium text-primary underline' to="/login">

@@ -3,44 +3,93 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: "poppins", "sans-serif";
+  --font-display: "Poppins", "Inter", "sans-serif";
   --breakpoint-3xl: 1920px;
   --color-primary: #875cf5;
-
+  --color-primary-dark: #6d3ef2;
+  --color-secondary: #ff6b6b;
+  --color-accent: #4ecdc4;
+  --color-bg-main: #f8fafc;
+  
+  --shadow-premium: 0 10px 25px -5px rgba(135, 92, 245, 0.1), 0 8px 10px -6px rgba(135, 92, 245, 0.1);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
 }
 
- @layer base {
+@layer base {
   html {
     font-family: var(--font-display);
-
+    scroll-behavior: smooth;
   }
   body {
-     background-color: #fcfbfc;
+     background-color: var(--color-bg-main);
+     color: #1e293b;
      overflow-x: hidden;
   }
- }
+}
 
- .input-box {
-  @apply w-full flex justify-between gap-3 text-sm text-black bg-slate-100 rounded px-4 py-3 mb-4 mt-3 border border-slate-200 outline-none; 
- }
- .btn-primary {
-  @apply w-full text-sm font-medium text-white bg-violet-500 shadow-lg shadow-purple-600/5 p-[10px] rounded-md my-1 hover:bg-purple-600/15 hover:text-purple-600
- }
+@layer components {
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-glass;
+  }
 
- .card {
-  @apply bg-white rounded-2xl shadow-md shadow-gray-100 border border-gray-200/50 p-6;
- }
+  .glass-dark {
+    @apply bg-gray-900/40 backdrop-blur-lg border border-white/10 shadow-xl;
+  }
 
- .card-btn {
-  @apply flex items-center gap-3 text-[12px] font-medium text-gray-700  hover:text-purple-500 bg-gray-50 hover:bg-purple-50 px-4 py-1.5 rounded-lg border border-gray-200/50 cursor-pointer;
- }
+  .input-box {
+    @apply w-full flex justify-between gap-3 text-sm text-gray-800 bg-white/50 rounded-xl px-4 py-3.5 mb-4 mt-1 border border-gray-200 outline-none transition-all duration-300 focus:border-primary focus:ring-2 focus:ring-primary/20; 
+  }
 
- .add-btn {
-  @apply flex items-center gap-1.5 text-xs md:text-sm font-medium text-purple-600 whitespace-nowrap bg-purple-50 border border-purple-100 rounded-lg px-4 py-2 cursor-pointer
- }
+  .btn-primary {
+    @apply w-full text-sm font-semibold text-white bg-primary shadow-lg shadow-primary/20 p-3 rounded-xl my-2 transition-all duration-300 hover:bg-primary-dark hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:pointer-events-none;
+  }
 
- .add-btn-fill {
-  @apply text-white bg-primary
- }
+  .card {
+    @apply bg-white rounded-3xl shadow-premium border border-gray-100 p-6 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5;
+  }
 
- 
+  .card-btn {
+    @apply flex items-center gap-2.5 text-[13px] font-semibold text-gray-600 hover:text-primary bg-gray-50/80 hover:bg-primary/5 px-4 py-2 rounded-xl border border-gray-100 transition-all duration-300 transform hover:scale-[1.02] active:scale-95;
+  }
+
+  .add-btn {
+    @apply flex items-center gap-1.5 text-xs md:text-sm font-semibold text-primary whitespace-nowrap bg-primary/5 border border-primary/10 rounded-xl px-5 py-2.5 transition-all duration-300 hover:bg-primary hover:text-white shadow-sm;
+  }
+
+  .add-btn-fill {
+    @apply text-white bg-primary hover:bg-primary-dark shadow-md shadow-primary/20;
+  }
+
+  .nav-item {
+    @apply w-full flex items-center gap-4 text-[15px] font-medium text-gray-500 rounded-xl px-4 py-3 transition-all duration-300 hover:bg-primary/5 hover:text-primary;
+  }
+
+  .nav-item-active {
+    @apply text-white bg-primary shadow-lg shadow-primary/30 hover:bg-primary-dark hover:text-white;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-200 rounded-full hover:bg-gray-300;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-400 font-bold;
+}

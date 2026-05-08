@@ -7,6 +7,7 @@ import axiosInstance from '../../utils/axiosinstance'
 import { API_PATHS } from '../../utils/apiPaths'
 import { useContext } from 'react'
 import { userContext } from '../../context/userContext'
+import { LuLogIn } from 'react-icons/lu'
 
 const Login = () => {
     const [email, setEmail] = useState("")
@@ -58,11 +59,13 @@ const Login = () => {
 
   return (
     <Authlayout>
-        <div className='lg:w-[70%] h-3/4 md:full flex flex-col justify-center '>
-            <h1 className='text-xl font-semibold text-black'>Welcome Back</h1>
-            <p className='text-xs text-slate-700 mt-[5px] mb-6'>Please enter your credentials to log in</p>
+        <div className='flex flex-col justify-center h-full'>
+            <div className='mb-8'>
+                <h1 className='text-3xl font-bold text-gray-900 mb-2'>Welcome Back</h1>
+                <p className='text-gray-500'>Please enter your credentials to access your account</p>
+            </div>
 
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleLogin} className='space-y-2'>
                 <Input
                 value={email} 
                 onChange={({target}) => setEmail(target.value)}
@@ -79,7 +82,10 @@ const Login = () => {
                 />
                 {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
 
-                <button type="submit" className='btn-primary'>LOGIN</button>
+                <button type="submit" className='btn-primary flex items-center justify-center gap-2 mt-4'>
+                   <LuLogIn className='text-lg' />
+                   <span>Login</span>
+                </button>
 
                 <p className='text-[13px] text-slate-800 mt-3'>Don't have  an account? {" "}
                     <Link className='font-medium text-primary underline' to="/signup">
