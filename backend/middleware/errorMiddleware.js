@@ -9,6 +9,9 @@ const errorHandler = (err, req, res, next) => {
         error = new ApiError(statusCode, message, error?.errors || [], err.stack);
     }
 
+    console.error(`[ERROR] ${error.statusCode} - ${error.message}`);
+    if (error.stack) console.error(error.stack);
+
     const response = {
         success: false,
         message: error.message,

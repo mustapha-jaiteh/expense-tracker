@@ -4,7 +4,12 @@ import { Types } from "mongoose";
 import { catchAsync } from "../utils/catchAsync.js";
 
 export const getDashboardData = catchAsync(async (req, res) => {
-    const userId = req.user.id;
+    const userId = req.user?._id;
+
+    if (!userId) {
+        throw new ApiError(401, "User not authenticated or found");
+    }
+
     const userObjectId = new Types.ObjectId(String(userId));
 
     // Fetch total income & expenses

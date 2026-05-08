@@ -15,9 +15,9 @@ export const registerUser = catchAsync(async (req, res) => {
 
     let profileImageUrl = req.body.profileImageUrl || null;
 
-    // If file is uploaded, use the file path
+    // If file is uploaded, use the relative path
     if (req.file) {
-        profileImageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+        profileImageUrl = `/uploads/${req.file.filename}`;
     }
 
     //validate user
