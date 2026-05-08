@@ -1,8 +1,8 @@
 import React from 'react'
-import { LuUtensils, LuTrendingUp, LuTrendingDown, LuTrash2 } from 'react-icons/lu'
+import { LuUtensils, LuTrendingUp, LuTrendingDown, LuTrash2, LuPen } from 'react-icons/lu'
 import { addThousandsSeparator } from '../../utils/helper'
 
-const TransactionInfoCard = ({ title, icon, amount, date, type, hideDeleteBtn, onDelete }) => {
+const TransactionInfoCard = ({ title, icon, amount, date, type, hideDeleteBtn, onDelete, onEdit }) => {
 
     const getAmountStyles = () => {
         return type === "income" ? "bg-green-50 text-green-600" : "bg-red-50 text-red-600";
@@ -30,6 +30,13 @@ const TransactionInfoCard = ({ title, icon, amount, date, type, hideDeleteBtn, o
             </div>
 
             <div className='flex items-center gap-2'>
+                {!hideDeleteBtn && (
+                    <button className='text-gray-400 hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer'
+                        onClick={onEdit}
+                    >
+                        <LuPen size={18} />
+                    </button>
+                )}
                 {!hideDeleteBtn && (
                     <button className='text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer'
                         onClick={onDelete}

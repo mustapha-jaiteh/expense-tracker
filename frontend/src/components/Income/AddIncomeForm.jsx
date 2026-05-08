@@ -3,13 +3,13 @@ import Input from "../inputs/Input.jsx"
 import EmojiPickerPopup from '../EmojiPickerPopup.jsx'
 
 
-const AddIncomeForm = ({onAddIncome}) => {
+const AddIncomeForm = ({onAddIncome, initialData}) => {
 
   const [income, setIncome] = useState({
-    source: "", 
-    amount: "",
-    date: "",
-    icon: "",
+    source: initialData?.source || "", 
+    amount: initialData?.amount || "",
+    date: initialData?.date ? initialData.date.split('T')[0] : "",
+    icon: initialData?.icon || "",
   })
 
   const handleChange = (key, value) => setIncome({...income, [key]: value});
@@ -51,9 +51,9 @@ const AddIncomeForm = ({onAddIncome}) => {
             <button 
             className="add-btn add-btn-fill"
             type='button'
-            onClick={() => onAddIncome(income)}
+            onClick={() => onAddIncome(initialData ? {...income, _id: initialData._id} : income)}
             >
-             Add Income
+             {initialData ? "Update Income" : "Add Income"}
             </button>
         </div>
     </div>

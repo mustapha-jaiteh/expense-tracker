@@ -22,6 +22,7 @@ const Income = () => {
     }
   );
  const [openAddIncomeModel, setOpenAddIncomeModel] = useState(false); 
+ const [editIncomeData, setEditIncomeData] = useState(null); 
  
  // get all income details
  const fetchIncomeDetails = async () => {
@@ -60,18 +61,33 @@ const Income = () => {
      }
 
      try {
-      await axiosInstance.post(API_PATHS.INCOME.ADD_INCOME, {
-        source,
-        amount, 
-        date,
-        icon,
-      })
+      if (income._id) {
+        await axiosInstance.put(API_PATHS.INCOME.UPDATE_INCOME(income._id), {
+          source,
+          amount, 
+          date,
+          icon,
+        })
+      } else {
+        await axiosInstance.post(API_PATHS.INCOME.ADD_INCOME, {
+          source,
+          amount, 
+          date,
+          icon,
+        })
+      }
       setOpenAddIncomeModel(false)
-      toast.success("Income added successfully")
+      setEditIncomeData(null)
+      toast.success(income._id ? "Income updated successfully" : "Income added successfully")
       fetchIncomeDetails()
      }catch(error) {
-      console.error("error adding income", error.response?.data?.message || error.message)
+      console.error("error adding/updating income", error.response?.data?.message || error.message)
      }
+ }
+
+ const handleEditIncome = (income) => {
+   setEditIncomeData(income)
+   setOpenAddIncomeModel(true)
  }
 
  // delete income
@@ -126,7 +142,10 @@ const Income = () => {
                 <div className=''>
                     <IncomeOverview 
                     transactions={incomeData}
-                    onAddIncome={() => setOpenAddIncomeModel(true)}
+                    onAddIncome={() => {
+                      setEditIncomeData(null)
+                      setOpenAddIncomeModel(true)
+                    }}
                     />
                 </div>
 
@@ -136,16 +155,21 @@ const Income = () => {
                   setOpenDeleteAlert({show: true, data: id})
                 }}
                 onDownload={handleDownloadIncomeDetails}
+                onEdit={handleEditIncome}
                  />
 
             </div>
            
            <Model 
            isOpen={openAddIncomeModel}
-           onClose={() => setOpenAddIncomeModel(false)}
-           title="Add Income"
+           onClose={() => {
+             setOpenAddIncomeModel(false)
+             setEditIncomeData(null)
+           }}
+           title={editIncomeData ? "Edit Income" : "Add Income"}
            >
           <AddIncomeForm 
+          initialData={editIncomeData}
           onAddIncome={handleAddIncome}
           />
            </Model> 

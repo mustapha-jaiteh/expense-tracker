@@ -25,6 +25,7 @@ const Expense = () => {
        }
      );
     const [openAddExpenseModel, setOpenAddExpenseModel] = useState(false); 
+    const [editExpenseData, setEditExpenseData] = useState(null); 
 
      // get all Expense details
  const fetchExpenseDetails = async () => {
@@ -63,18 +64,33 @@ const Expense = () => {
      }
 
      try {
-      await axiosInstance.post(API_PATHS.EXPENSE.ADD_EXPENSE, {
-        category,
-        amount, 
-        date,
-        icon,
-      })
+      if (expense._id) {
+          await axiosInstance.put(API_PATHS.EXPENSE.UPDATE_EXPENSE(expense._id), {
+            category,
+            amount, 
+            date,
+            icon,
+          })
+      } else {
+          await axiosInstance.post(API_PATHS.EXPENSE.ADD_EXPENSE, {
+            category,
+            amount, 
+            date,
+            icon,
+          })
+      }
       setOpenAddExpenseModel(false)
-      toast.success("Expense added successfully")
+      setEditExpenseData(null)
+      toast.success(expense._id ? "Expense updated successfully" : "Expense added successfully")
       fetchExpenseDetails()
      }catch(error) {
-      console.error("error adding expense", error.response?.data?.message || error.message)
+      console.error("error adding/updating expense", error.response?.data?.message || error.message)
      }
+ }
+
+ const handleEditExpense = (expense) => {
+   setEditExpenseData(expense)
+   setOpenAddExpenseModel(true)
  }
 
  // delete expense 
@@ -129,7 +145,10 @@ const Expense = () => {
             <div className=''>
               <ExpenseOverview 
               transactions={expenseData}
-              onExpenseIncome={() => setOpenAddExpenseModel(true)}
+              onExpenseIncome={() => {
+                setEditExpenseData(null)
+                setOpenAddExpenseModel(true)
+              }}
               />
             </div>
 
@@ -137,15 +156,20 @@ const Expense = () => {
             transactions={expenseData}
             onDelete={(id) => setOpenDeleteAlert({show: true, data: id})}
             onDownload={handleDownloadExpenseDetails}
+            onEdit={handleEditExpense}
             />
            </div>
 
            <Model
            isOpen={openAddExpenseModel}
-           onClose={() => setOpenAddExpenseModel}
-           title="Add Expense"
+           onClose={() => {
+             setOpenAddExpenseModel(false)
+             setEditExpenseData(null)
+           }}
+           title={editExpenseData ? "Edit Expense" : "Add Expense"}
            >
             <AddExpenseForm
+            initialData={editExpenseData}
             onAddExpense={handleAddExpense}
             />
            </Model>
