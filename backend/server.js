@@ -47,6 +47,14 @@ app.use("/api/dashboard", dashboardRoutes);
 //server uploads folder
 app.use("/uploads", express.static(path.join(path.resolve(), "uploads")));
 
+app.get("/", (req, res) => {
+    res.status(200).json({ message: "API is running..." });
+});
+
+app.use((req, res, next) => {
+    res.status(404).json({ message: "Endpoint not found" });
+});
+
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 10000;
