@@ -53,7 +53,7 @@ const App = () => {
         />
 
         {/* Root Redirect Logic */}
-        <Route path="/" element={<RootRedirect />} />
+        <Route path="/" element={<Navigate to="/login" />} />
 
         {/* Catch-all: Redirect unknown paths to dashboard or login */}
         <Route path="*" element={<Navigate to="/login" />} />
@@ -70,12 +70,6 @@ const App = () => {
     />
     </UserProvider>
   );
-};
-
-// Logic for the base URL (/)
-const RootRedirect = () => {
-  const isAuthenticated = !!localStorage.getItem("token");
-  return isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />;
 };
 
 export default App;
