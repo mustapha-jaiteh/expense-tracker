@@ -24,7 +24,6 @@ app.use(cors({
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("dev"));
-app.use(mongoSanitize());
 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -35,6 +34,7 @@ app.use("/api/", limiter);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(mongoSanitize());
 app.use("/uploads", express.static(path.join(path.resolve(), "uploads")));
 
 connectDB();
