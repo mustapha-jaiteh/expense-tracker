@@ -34,7 +34,15 @@ app.use("/api/", limiter);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(mongoSanitize());
+
+// Custom middleware to handle mongo sanitization for Express 5 compatibility
+app.use((req, res, next) => {
+    if (req.body) mongoSanitize.sanitize(req.body);
+    if (req.query) mongoSanitize.sanitize(req.query);
+    if (req.params) mongoSanitize.sanitize(req.params);
+    next();
+});
+
 app.use("/uploads", express.static(path.join(path.resolve(), "uploads")));
 
 connectDB();
