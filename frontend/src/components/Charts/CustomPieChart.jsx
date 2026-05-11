@@ -2,6 +2,7 @@ import React from 'react'
 import {PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend} from 'recharts';
 import CustomTooltip from './CustomTooltip';
 import CustomLegend from './CustomLegend';
+import { addThousandsSeparator } from '../../utils/helper';
 
 
 const CustomPieChart = ({data, colors, label, totalAmount, showTextAnchor}) => {
