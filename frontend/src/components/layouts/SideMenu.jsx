@@ -27,20 +27,27 @@ const SideMenu = ({ activeMenu }) => {
       <div className='flex flex-col items-center justify-center gap-4 mt-4'>
        <div className='relative group'>
         <div className='absolute -inset-1  rounded-full blur opacity-25 group-hover:opacity-50 transition-opacity' />
-       {user?.profileImageUrl ? (
-        <img 
-          src={user.profileImageUrl.startsWith("http") ? user.profileImageUrl : `${BASE_URL}${user.profileImageUrl}`} 
-          alt="Profile Image" 
-          className='w-20 h-20 rounded-full object-cover bg-slate-400' 
-        />
-       ) : (
-        <CharAvatar 
-        fullName={user?.fullName}
-        width="w-20"
-        height="h-20"
-        styte="text-xl"
-        />
-       )}
+        {user?.profileImageUrl ? (
+         <img 
+           src={user.profileImageUrl.startsWith("http") ? user.profileImageUrl : `${BASE_URL}${user.profileImageUrl.startsWith('/') ? "" : "/"}${user.profileImageUrl}`} 
+           alt="Profile Image" 
+           className='w-20 h-20 rounded-full object-cover bg-slate-400' 
+           onError={(e) => {
+             e.target.style.display = 'none';
+             e.target.nextSibling.style.display = 'flex';
+           }}
+         />
+        ) : null}
+        {(!user?.profileImageUrl || user?.profileImageUrl) && (
+          <div style={{ display: user?.profileImageUrl ? 'none' : 'flex' }}>
+            <CharAvatar 
+              fullName={user?.fullName}
+              width="w-20"
+              height="h-20"
+              styte="text-xl"
+            />
+          </div>
+        )}
        </div>
 
        <div className='text-center mb-8'>

@@ -140,7 +140,7 @@ const Expense = () => {
 
   return (
      <DashboardLayout activeMenu="Expense">
-        <div className='my-5 mx-auto'>
+        <div className='my-5 px-4 md:px-0 mx-auto'>
            <div className='grid grid-cols-1 gap-6'>
             <div className=''>
               <ExpenseOverview 

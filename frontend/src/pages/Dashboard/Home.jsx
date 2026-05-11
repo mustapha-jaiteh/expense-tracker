@@ -46,7 +46,7 @@ const Home = () => {
  }, []);
   return (
     <DashboardLayout activeMenu="Dashboard" >
-        <div className='my-5 mx-auto'>
+        <div className='my-5 px-4 md:px-0 mx-auto'>
          <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
            <InfoCard
             label="Total Balance"
