@@ -34,8 +34,11 @@ axiosInstance.interceptors.response.use(
     },
     (error) => {
         if(error.response && error.response.status === 401) {
-            // Redirect to login page
-            window.location.href = "/login";
+            // Redirect to login page if NOT already on login or signup
+            const isAuthPage = window.location.pathname === "/login" || window.location.pathname === "/signup";
+            if (!isAuthPage) {
+                window.location.href = "/login";
+            }
         }else if(error.response && error.response.status === 500) {
             // Redirect to 500 page
           console.error("Server Error:", error);

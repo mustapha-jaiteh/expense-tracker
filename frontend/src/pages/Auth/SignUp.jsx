@@ -18,6 +18,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   const {updateUser, setToken} = useContext(userContext)
   const navigate = useNavigate() 
@@ -42,6 +43,7 @@ const SignUp = () => {
     }
 
     setError("")
+    setLoading(true)
 
     //Sign Up API call 
     try {
@@ -65,6 +67,8 @@ const SignUp = () => {
       }else{
         setError("Something went wrong");
       }
+    } finally {
+      setLoading(false)
     }
   }
   return (
@@ -112,9 +116,17 @@ const SignUp = () => {
 
            {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
 
-           <button type="submit" className='btn-primary flex items-center justify-center gap-2 mt-2'>
-             <LuUserPlus className='text-lg' />
-             <span>Sign Up</span>
+           <button 
+             type="submit" 
+             disabled={loading}
+             className='btn-primary flex items-center justify-center gap-2 mt-2 disabled:opacity-70 disabled:cursor-not-allowed'
+           >
+              {loading ? (
+                <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              ) : (
+                <LuUserPlus className='text-lg' />
+              )}
+             <span>{loading ? "Creating account..." : "Sign Up"}</span>
            </button>
 
            <p className='text-[13px] text-slate-800 mt-3'>Already have an account? {" "}

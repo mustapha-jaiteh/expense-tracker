@@ -13,6 +13,7 @@ const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState(null)
+    const [loading, setLoading] = useState(false)
 
     const {updateUser, setToken} = useContext(userContext)
 
@@ -34,6 +35,7 @@ const Login = () => {
         }
 
         setError("")
+        setLoading(true)
 
         //Login API call  
         try {
@@ -54,6 +56,8 @@ const Login = () => {
             }else{
                 setError("Something went wrong");
             }
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -82,9 +86,17 @@ const Login = () => {
                 />
                 {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
 
-                <button type="submit" className='btn-primary flex items-center justify-center gap-2 mt-4'>
-                   <LuLogIn className='text-lg' />
-                   <span>Login</span>
+                <button 
+                  type="submit" 
+                  disabled={loading}
+                  className='btn-primary flex items-center justify-center gap-2 mt-4 disabled:opacity-70 disabled:cursor-not-allowed'
+                >
+                   {loading ? (
+                    <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                   ) : (
+                    <LuLogIn className='text-lg' />
+                   )}
+                   <span>{loading ? "Logging in..." : "Login"}</span>
                 </button>
 
                 <p className='text-[13px] text-slate-800 mt-3'>Don't have  an account? {" "}
