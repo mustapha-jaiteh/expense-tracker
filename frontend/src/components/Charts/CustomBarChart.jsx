@@ -1,9 +1,27 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell} from 'recharts'
+import { addThousandsSeparator } from '../../utils/helper'
 
 
 const CustomBarChart = ({ data, xAxisDataKey = "category" }) => {
 
+
+    const [barSize, setBarSize] = useState(24);
+    
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 1024) { // lg
+                setBarSize(56);
+            } else if (window.innerWidth >= 768) { // md
+                setBarSize(40);
+            } else {
+                setBarSize(24);
+            }
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     //function to alternate colors
     const getBarColor = (index) => {
@@ -49,7 +67,7 @@ const CustomBarChart = ({ data, xAxisDataKey = "category" }) => {
                         dataKey="amount"
                         fill="var(--color-primary)"
                         radius={[8, 8, 0, 0]}
-                        barSize={32}
+                        barSize={barSize}
                     >
                         {data.map((entry, index) => (
                           <Cell key={`cell-${index}`} fill={index % 2 === 0 ? "#875cf5" : "#c4b5fd"} />

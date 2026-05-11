@@ -54,7 +54,7 @@ const SideMenu = ({ activeMenu }) => {
        {SIDE_MENU_ITEMS.map((item, index) => (
         <button
          key={`menu_${index}`}
-         className={`${activeMenu === item.label ? "nav-item-active" : "nav-item"}`}
+         className={`nav-item ${activeMenu === item.label ? "nav-item-active" : ""}`}
          onClick={() => handleClick(item.path)}
         >
             <span className='text-xl'>{item.icon}</span>

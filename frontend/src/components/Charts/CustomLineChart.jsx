@@ -1,5 +1,6 @@
 import React from 'react'
 import { XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Area, AreaChart } from 'recharts'
+import { addThousandsSeparator } from '../../utils/helper'
 
 const CustomLineChart = ({data}) => {
 
