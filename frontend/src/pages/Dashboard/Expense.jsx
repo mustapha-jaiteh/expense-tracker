@@ -180,7 +180,7 @@ const Expense = () => {
            >
             <DeleteAlert 
             content="Are you sure you want to delete this expense details"
-            onDelete={() => deleteIncome(openDeleteAlert.data)}
+            onDelete={() => deleteExpense(openDeleteAlert.data)}
             />
           </Model>
         </div>
