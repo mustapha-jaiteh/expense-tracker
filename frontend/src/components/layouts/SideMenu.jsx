@@ -26,7 +26,7 @@ const SideMenu = ({ activeMenu }) => {
     <div className='w-64 h-[calc(100vh-61px)] glass border-r-0 border-t-0 p-6 sticky top-[61px] z-20 rounded-none'>
       <div className='flex flex-col items-center justify-center gap-4 mt-4'>
        <div className='relative group'>
-        <div className='absolute -inset-1 bg-gradient-to-tr from-primary to-purple-400 rounded-full blur opacity-25 group-hover:opacity-50 transition-opacity' />
+        <div className='absolute -inset-1  rounded-full blur opacity-25 group-hover:opacity-50 transition-opacity' />
        {user?.profileImageUrl ? (
         <img 
           src={user.profileImageUrl.startsWith("http") ? user.profileImageUrl : `${BASE_URL}${user.profileImageUrl}`} 

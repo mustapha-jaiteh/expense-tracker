@@ -4,7 +4,7 @@ import { LuTrendingUpDown } from "react-icons/lu"
 
 const Authlayout = ({ children }) => {
   return (
-    <div className='flex min-h-screen bg-bg-main overflow-hidden'>
+    <div className='flex min-h-screen bg-bg-main'>
       {/* Left Column: Form Content */}
       <div className='w-full md:w-[60vw] px-8 md:px-16 lg:px-24 py-12 flex flex-col justify-center animate-fade-in'>
         <div className='max-w-md w-full mx-auto'>

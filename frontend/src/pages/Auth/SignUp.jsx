@@ -69,7 +69,7 @@ const SignUp = () => {
   }
   return (
     <Authlayout>
-      <div className='flex flex-col justify-center h-full'>
+      <div className='flex flex-col justify-center'>
         <div className='mb-6'>
           <h1 className='text-3xl font-bold text-gray-900 mb-2'>Create Account</h1>
           <p className='text-gray-500'>Join us today and start managing your finances smarter.</p>
@@ -99,7 +99,7 @@ const SignUp = () => {
                 placeholder="please enter your email"
                 type="text"
                 />
-                <div className='col-span-2'>
+                <div className='md:col-span-2'>
                 <Input
                 value={password} 
                 onChange={({target}) => setPassword(target.value)}

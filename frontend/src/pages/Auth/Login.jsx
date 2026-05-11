@@ -59,7 +59,7 @@ const Login = () => {
 
   return (
     <Authlayout>
-        <div className='flex flex-col justify-center h-full'>
+        <div className='flex flex-col justify-center'>
             <div className='mb-8'>
                 <h1 className='text-3xl font-bold text-gray-900 mb-2'>Welcome Back</h1>
                 <p className='text-gray-500'>Please enter your credentials to access your account</p>
