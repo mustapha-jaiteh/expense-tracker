@@ -9,7 +9,7 @@ const axiosInstance = axios.create({
         Accept: "application/json",
     },
 
-    // withCredentials: true,
+    withCredentials: true,
 });
 
 // Request interceptor
