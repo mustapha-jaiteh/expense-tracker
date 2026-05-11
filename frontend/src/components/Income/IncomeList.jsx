@@ -11,7 +11,7 @@ const IncomeList = ({transactions, onDelete, onDownload, onEdit}) => {
              
              <button className='card-btn group' onClick={onDownload}>
                 <LuDownload className="text-lg group-hover:translate-y-0.5 transition-transform" /> 
-                <span>Download Report</span>
+                <span className='hidden sm:block'>Download Report</span>
              </button>
         </div>
 

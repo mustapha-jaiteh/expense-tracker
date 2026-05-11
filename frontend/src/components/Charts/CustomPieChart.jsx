@@ -20,8 +20,8 @@ const CustomPieChart = ({data, colors, label, totalAmount, showTextAnchor}) => {
                     data={data}
                     cx="50%"
                     cy="50%"
-                    innerRadius={100}
-                    outerRadius={130}
+                    innerRadius={window.innerWidth < 768 ? 80 : 100}
+                    outerRadius={window.innerWidth < 768 ? 110 : 130}
                     labelLine={false}
                     dataKey="amount"
                     nameKey="name"
@@ -36,7 +36,7 @@ const CustomPieChart = ({data, colors, label, totalAmount, showTextAnchor}) => {
                     dy={-25}
                     textAnchor="middle"
                     fill='#666'
-                    fontSize="14px"
+                    fontSize={window.innerWidth < 768 ? "12px" : "14px"}
                   
                     >
                         {label}
@@ -45,14 +45,14 @@ const CustomPieChart = ({data, colors, label, totalAmount, showTextAnchor}) => {
                     <text
                     x="50%"
                     y="50%"
-                    dy={8}
+                    dy={window.innerWidth < 768 ? 5 : 8}
                     textAnchor="middle"
                     fill='#333'
-                    fontSize="24px"
+                    fontSize={window.innerWidth < 768 ? "20px" : "24px"}
                     fontWeight="semibold"
                   
                     >
-                       D{totalAmount}
+                       ${addThousandsSeparator(totalAmount)}
                     </text> 
                     </>
                 )}

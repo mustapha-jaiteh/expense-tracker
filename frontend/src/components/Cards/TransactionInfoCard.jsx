@@ -10,7 +10,7 @@ const TransactionInfoCard = ({ title, icon, amount, date, type, hideDeleteBtn, o
 
     return (
         <div className='group relative flex items-center gap-3 md:gap-4 mt-2 p-3 md:p-4 rounded-xl md:rounded-2xl transition-all duration-300 hover:bg-gray-50 border border-transparent hover:border-gray-100'>
-            <div className='w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-xl md:text-2xl bg-gray-100/80 rounded-lg md:rounded-xl group-hover:scale-110 transition-transform duration-300 flex-shrink-0'>
+            <div className='w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-xl md:text-2xl bg-gray-100/80 rounded-lg md:rounded-xl group-hover:scale-110 transition-transform duration-300 shrink-0'>
                 {icon ? (
                     typeof icon === 'string' && (icon.startsWith('http') || icon.startsWith('data:')) ? (
                         <img src={icon} alt={title} className='w-5 h-5 md:w-6 md:h-6' />
