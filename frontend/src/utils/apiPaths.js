@@ -15,14 +15,14 @@ export const API_PATHS = {
         ADD_INCOME: "/api/income/add",
         UPDATE_INCOME: (incomeId) => `/api/income/${incomeId}`,
         DELETE_INCOME: (incomeId) => `/api/income/${incomeId}`,
-        DOWNLOAD_INCOME: "/api/income/downloadexcel ",
+        DOWNLOAD_INCOME: "/api/income/downloadexcel",
     },
     EXPENSE: {
         GET_ALL_EXPENSE: "/api/expense/get",
         ADD_EXPENSE: "/api/expense/add",
         UPDATE_EXPENSE: (expenseId) => `/api/expense/${expenseId}`,
         DELETE_EXPENSE: (expenseId) => `/api/expense/${expenseId}`,
-        DOWNLOAD_EXPENSE: "/api/expense/downloadexcel ",
+        DOWNLOAD_EXPENSE: "/api/expense/downloadexcel",
     },
     IMAGE: {
         UPLOAD_IMAGE: "/api/auth/uploadProfileImage",

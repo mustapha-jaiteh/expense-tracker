@@ -16,10 +16,9 @@ import { errorHandler } from "./middleware/errorMiddleware.js";
 const app = express();
 
 app.use(cors({
-    origin: [process.env.CLIENT_URL, "https://expense-tracker-tau-liart-73.vercel.app", "http://localhost:5173"],
+    origin: [process.env.CLIENT_URL, "https://expense-tracker-tau-liart-73.vercel.app", "http://localhost:5173", "*"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
 }));
 
 app.use(helmet());
